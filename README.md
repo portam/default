@@ -15,6 +15,7 @@ Your goal is to start from this [LiveKit Agents](https://docs.livekit.io/agents/
 You are free to use any other tools, patterns or library you might need to achieve this mission.
 
 ### Objective 1: Build a basic booking flow
+
 The assistant should be able to complete the booking workflow following these steps:
 
 1. Greet the patient on arrival
@@ -76,11 +77,30 @@ cp .env.example .env
 **Azure keys**
 We will provide those keys for you, in a secure way.
 
-### Run the project
+### Running the Application
+
+The application consists of two services that need to run simultaneously:
+
+**Terminal 1 - Start the Availability API:**
+
+```shell
+uv run uvicorn src.api.availability_server:app --host 0.0.0.0 --port 8080
+```
+
+**Terminal 2 - Start the LiveKit Agent:**
 
 ```shell
 uv run main.py dev
 ```
 
-Then go to [LiveKit Agents Playground](https://agents-playground.livekit.io).
-Your agent should connect to the playground room and start talking.
+### Testing the Agent
+
+1. Ensure both services are running (API on port 8080, Agent connected to LiveKit)
+2. Go to [LiveKit Agents Playground](https://agents-playground.livekit.io)
+3. Your agent should connect to the playground room and start talking
+
+### Running Tests
+
+```shell
+uv run pytest tests/ -v
+```
